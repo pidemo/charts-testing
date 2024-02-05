@@ -86,6 +86,8 @@ const myChart = new Chart(ctx, {
 const listWrapper = document.querySelector('.list-wrapper');
 const stockWrapper = listWrapper.querySelectorAll('div'); // Assuming each item is a direct child div
 
+console.log(listWrapper,stockWrapper);
+
 // 2. Loop through each item
 stockWrapper.forEach((item) => {
     const itemName = item.querySelector('.item-name').textContent; // Get the name
