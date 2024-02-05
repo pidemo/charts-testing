@@ -4,6 +4,7 @@
 // PART 1
 // document.addEventListener('DOMContentLoaded', function() {
 const totalMonths = 239;
+let longestTimeframe = [];
 
 function reformatData(data) {
     const monthlySeries = data["Monthly Time Series"];
@@ -26,7 +27,7 @@ function reformatData(data) {
 
 // Now cmsData.dates and cmsData.closeValues already contain what you need
 const dates = cmsData.dates;
-const selectedValues = cmsData.closeValues; // Already numeric and reversed
+//const selectedValues = cmsData.closeValues; // Already numeric and reversed
 
 
 // PART 2 : Drawing graph
@@ -34,7 +35,7 @@ const ctx = document.getElementById('myChart');
 const myChart = new Chart(ctx, {
     type: 'line',
     data: {
-        labels: dates,
+        labels: [],
         datasets: [
       /*
       {
@@ -65,8 +66,9 @@ stockWrapper.forEach((item) => {
     const itemData = reformatData(JSON.parse(itemDataString)); // Parse the JSON string to an object
     const itemDataValues = itemData.closeValues;
 
-    const monthsCount = itemData.dates.length;
-    console.log(itemName, monthsCount);
+    if (longestTimeframe.length < itemData.dates.length) {
+        let longestTimeframe = itemData.dates;
+    }
   
     // 3. Create a new dataset object for the chart
     const newDataset = {
@@ -78,7 +80,8 @@ stockWrapper.forEach((item) => {
   
     // Push the new dataset to the chart
     myChart.data.datasets.push(newDataset);
-  });
+});
 
+myChart.data.labels.push(longestTimeframe);
 myChart.update();
 //});
