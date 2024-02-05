@@ -28,7 +28,7 @@ const selectedValues = numericCloseValues.slice(0, totalMonths).reverse();
 // Drawingn graph
 const ctx = document.getElementById('myChart');
 
-new Chart(ctx, {
+const myChart = new Chart(ctx, {
     type: 'line',
     data: {
         labels: dates,
@@ -50,6 +50,7 @@ new Chart(ctx, {
         }
     }
 });
+
 
 const newDataset = {
     label: "Test Name",
