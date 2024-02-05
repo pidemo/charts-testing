@@ -19,9 +19,12 @@ document.addEventListener('DOMContentLoaded', function () {
     stocks.forEach(stock => {
       const name = stock.querySelector('.item-name').textContent;
       const ticker = stock.querySelector('.item-ticker').textContent;
+      const color = stock.querySelector('.item-color').style.backgroudColor;
       const jsonData = JSON.parse(stock.querySelector('.item-data').textContent);
       const tradingDates = Object.keys(jsonData["Monthly Time Series"]);
       const data = new Array(maxLength).fill(null); // Initialize array with nulls
+
+      console.log(color);
   
       // Fill in data from the end, assuming data starts from the latest month backwards
       for (let i = 0; i < tradingDates.length; i++) {
@@ -34,7 +37,8 @@ document.addEventListener('DOMContentLoaded', function () {
         label: `${name} (${ticker})`,
         data: data,
         fill: false,
-        borderColor: `#${Math.floor(Math.random()*16777215).toString(16)}`, // Random color
+        borderColor: color,
+        //borderColor: `#${Math.floor(Math.random()*16777215).toString(16)}`, // Random color
         tension: 0.1
       });
     });
