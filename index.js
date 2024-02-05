@@ -32,13 +32,13 @@ document.addEventListener('DOMContentLoaded', function () {
       });
   
       console.log(color);
-      
+
       // Add this stock's data to the array
       stockData.push({
         label: `${name} (${ticker})`,
         data: data,
         fill: false,
-        borderColor: `#${Math.floor(Math.random()*16777215).toString(16)}`, // Random color
+        borderColor: color, //`#${Math.floor(Math.random()*16777215).toString(16)}`, // Random color
         tension: 0.1
       });
     });
