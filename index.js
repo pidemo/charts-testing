@@ -28,7 +28,7 @@ const selectedValues = numericCloseValues.slice(0, totalMonths).reverse();
 */
 
 // PART 1 V2
-
+document.addEventListener('DOMContentLoaded', function() {
 const totalMonths = 239;
 
 function reformatData(data) {
@@ -111,3 +111,4 @@ stockWrapper.forEach((item) => {
 
 // 4. Update the chart to reflect the new datasets
 myChart.update();
+});
