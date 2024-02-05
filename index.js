@@ -19,7 +19,8 @@ document.addEventListener('DOMContentLoaded', function () {
     stocks.forEach(stock => {
       const name = stock.querySelector('.item-name').textContent;
       const ticker = stock.querySelector('.item-ticker').textContent;
-      const color = stock.querySelector('.item-color').style.backgroudColor;
+      const colorDiv = stock.querySelector('.item-color');
+      const color = colorDiv.style.backgroudColor;
       const jsonData = JSON.parse(stock.querySelector('.item-data').textContent);
       const tradingDates = Object.keys(jsonData["Monthly Time Series"]);
       const data = new Array(maxLength).fill(null); // Initialize array with nulls
