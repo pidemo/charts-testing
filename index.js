@@ -84,7 +84,7 @@ const myChart = new Chart(ctx, {
 
 // Now select the list-wrapper element and its child stocks
 //const listWrapper = document.querySelectorAll('.list-wrapper');
-const stockWrapper = listWrapper.querySelectorAll('.stock-wrapper'); // Assuming each item is a direct child div
+const stockWrapper = document.querySelectorAll('.stock-wrapper'); // Assuming each item is a direct child div
 
 console.log(stockWrapper);
 
