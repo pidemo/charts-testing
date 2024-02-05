@@ -64,6 +64,9 @@ stockWrapper.forEach((item) => {
     const itemDataString = item.querySelector('.item-data').textContent; // Get the dataset string
     const itemData = reformatData(JSON.parse(itemDataString)); // Parse the JSON string to an object
     const itemDataValues = itemData.closeValues;
+
+    const monthsCount = itemData.dates.length;
+    console.log(itemName, monthsCount);
   
     // 3. Create a new dataset object for the chart
     const newDataset = {
