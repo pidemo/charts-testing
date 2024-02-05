@@ -3,60 +3,68 @@
 document.addEventListener('DOMContentLoaded', function () {
     const stocks = document.querySelectorAll('.stock-wrapper');
   
-    let maxLength = 0;
+    let allDatesSet = new Set(); // Use a set to collect unique dates
     let stockData = [];
-    
-    // 1. Determine the longest trading history
+  
+    // Collect all unique dates from all stocks
     stocks.forEach(stock => {
       const jsonData = JSON.parse(stock.querySelector('.item-data').textContent);
-      const dataLength = Object.keys(jsonData["Monthly Time Series"]).length;
-      if (dataLength > maxLength) {
-        maxLength = dataLength;
-      }
+      const tradingDates = Object.keys(jsonData["Monthly Time Series"]);
+      tradingDates.forEach(date => allDatesSet.add(date));
     });
   
-    // 2. Process each stock and prepare its data
+    // Convert the set to an array and sort the dates
+    let allDates = Array.from(allDatesSet);
+    allDates.sort((a, b) => new Date(a) - new Date(b));
+  
+    // Process each stock and prepare its data
     stocks.forEach(stock => {
       const name = stock.querySelector('.item-name').textContent;
       const ticker = stock.querySelector('.item-ticker').textContent;
-      const colorDiv = stock.querySelector('.item-color');
-      const color = colorDiv.style.backgroudColor;
+      const color = stock.querySelector('.item-color').style.backgroundColor;
       const jsonData = JSON.parse(stock.querySelector('.item-data').textContent);
-      const tradingDates = Object.keys(jsonData["Monthly Time Series"]);
-      const data = new Array(maxLength).fill(null); // Initialize array with nulls
-
-      console.log(colorDiv,color);
+      const data = allDates.map(date => {
+        if (jsonData["Monthly Time Series"][date]) {
+          return jsonData["Monthly Time Series"][date]["4. close"];
+        } else {
+          return null; // This stock has no data for this date
+        }
+      });
   
-      // Fill in data from the end, assuming data starts from the latest month backwards
-      for (let i = 0; i < tradingDates.length; i++) {
-        const monthIndex = maxLength - i - 1; // Calculate index based on length
-        data[monthIndex] = jsonData["Monthly Time Series"][tradingDates[i]]["4. close"];
-      }
-  
+      console.log(color);
+      
       // Add this stock's data to the array
       stockData.push({
         label: `${name} (${ticker})`,
         data: data,
         fill: false,
-        borderColor: color,
-        //borderColor: `#${Math.floor(Math.random()*16777215).toString(16)}`, // Random color
+        borderColor: `#${Math.floor(Math.random()*16777215).toString(16)}`, // Random color
         tension: 0.1
       });
     });
   
-    // Assuming a sequential timeline for x-axis labels
-    const labels = Array.from({ length: maxLength }, (_, i) => `Month ${i + 1}`);
-  
-    // 3. Render the chart
+    // Render the chart
     const ctx = document.getElementById('chart').getContext('2d');
     new Chart(ctx, {
       type: 'line',
       data: {
-        labels: labels,
+        labels: allDates, // Use the sorted dates as labels
         datasets: stockData
       },
       options: {
         scales: {
+          x: {
+            type: 'time',
+            time: {
+              parser: 'yyyy-MM-dd', // Specify the date format if necessary
+              tooltipFormat: 'MMM yyyy',
+              unit: 'month'
+            },
+            title: {
+              display: true,
+              text: 'Date'
+            }
+          },
           y: {
             beginAtZero: true,
             title: {
@@ -68,6 +76,7 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
   });
+  
   
 
 /*
