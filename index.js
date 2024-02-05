@@ -1,33 +1,7 @@
 // Make webhook :
 // https://hook.us1.make.com/juascp0jwebf88z4p4ixxm6x17jvjp9d
 
-// PART 1 v1
-/*
-const totalMonths = 239;
-  
-function reformatData(data) {
-    const monthlySeries = data["Monthly Time Series"];
-    const reformattedArray = Object.entries(monthlySeries).map(([date, values]) => {
-        return { date: date, close: values["4. close"] };
-    });
-    return reformattedArray;
-}
-	
-const stocks = document.querySelector('#stocks');
-const cmsData = reformatData(JSON.parse(stocks.querySelector('#data').innerText));
-
-// Extracting an array of dates, and reverse order
-const dates = cmsData.map(item => item.date).slice(0, totalMonths).reverse();
-
-// Extracting an array of close values
-const closeValues = cmsData.map(item => item.close);
-
-// Converting values to numerical
-const numericCloseValues = closeValues.map(value => parseFloat(value));
-const selectedValues = numericCloseValues.slice(0, totalMonths).reverse();
-*/
-
-// PART 1 V2
+// PART 1
 document.addEventListener('DOMContentLoaded', function() {
 const totalMonths = 239;
 
@@ -55,9 +29,7 @@ const dates = cmsData.dates;
 const selectedValues = cmsData.closeValues; // Already numeric and reversed
 
 
-// PART 2
-
-// Drawingn graph
+// PART 2 : Drawing graph
 const ctx = document.getElementById('myChart');
 const myChart = new Chart(ctx, {
     type: 'line',
@@ -82,11 +54,9 @@ const myChart = new Chart(ctx, {
     }
 });
 
-// Now select the list-wrapper element and its child stocks
-//const listWrapper = document.querySelectorAll('.list-wrapper');
-const stockWrapper = document.querySelectorAll('.stock-wrapper'); // Assuming each item is a direct child div
 
-console.log(stockWrapper);
+// Now select the list-wrapper element and its child stocks
+const stockWrapper = document.querySelectorAll('.stock-wrapper'); // Assuming each item is a direct child div
 
 // 2. Loop through each item
 stockWrapper.forEach((item) => {
@@ -106,9 +76,6 @@ stockWrapper.forEach((item) => {
     // Push the new dataset to the chart
     myChart.data.datasets.push(newDataset);
   });
-  
 
-
-// 4. Update the chart to reflect the new datasets
 myChart.update();
 });
