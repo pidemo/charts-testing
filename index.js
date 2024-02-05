@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const tradingDates = Object.keys(jsonData["Monthly Time Series"]);
       const data = new Array(maxLength).fill(null); // Initialize array with nulls
 
-      console.log(color);
+      console.log(colorDiv,color);
   
       // Fill in data from the end, assuming data starts from the latest month backwards
       for (let i = 0; i < tradingDates.length; i++) {
