@@ -44,7 +44,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   
     // Render the chart v1
-    /*
     const ctx = document.getElementById('chart').getContext('2d');
     new Chart(ctx, {
       type: 'line',
@@ -76,55 +75,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
       }
     });
-    */
-   // Render chart v2
-   const ctx = document.getElementById('chart').getContext('2d');
-const chart = new Chart(ctx, {
-  type: 'line',
-  data: {
-    // Your datasets and labels here
-  },
-  options: {
-    // Existing configuration options here
-    animation: {
-      // Animate along the x axis
-      x: {
-        type: 'number',
-        easing: 'linear',
-        duration: 1500, // Animation duration in milliseconds
-        from: 0, // Start from the left of the chart
-        delay(ctx) {
-          if (ctx.type !== 'data' || ctx.xStarted) {
-            return 0;
-          }
-          ctx.xStarted = true;
-          return ctx.index * 150; // Delay between each line's animation
-        }
-      },
-      y: {
-        type: 'number',
-        easing: 'linear',
-        duration: 1500,
-        from: (ctx) => {
-          if (ctx.type === 'data') {
-            const controller = ctx.chart.controllers[0];
-            const yScale = controller.scales.y;
-            return yScale.getPixelForValue(yScale.min);
-          }
-          return 0;
-        },
-        delay(ctx) {
-          if (ctx.type !== 'data' || ctx.yStarted) {
-            return 0;
-          }
-          ctx.yStarted = true;
-          return ctx.index * 150; // Delay can be adjusted for each dataset
-        }
-      }
-    }
-  }
-});
-
   });
   
   
