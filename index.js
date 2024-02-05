@@ -2,7 +2,7 @@
 // https://hook.us1.make.com/juascp0jwebf88z4p4ixxm6x17jvjp9d
 
 // PART 1
-document.addEventListener('DOMContentLoaded', function() {
+// document.addEventListener('DOMContentLoaded', function() {
 const totalMonths = 239;
 
 function reformatData(data) {
@@ -78,4 +78,4 @@ stockWrapper.forEach((item) => {
   });
 
 myChart.update();
-});
+//});
