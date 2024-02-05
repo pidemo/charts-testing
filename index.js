@@ -1,87 +1,62 @@
-// Make webhook :
-// https://hook.us1.make.com/juascp0jwebf88z4p4ixxm6x17jvjp9d
-
-// PART 1
-document.addEventListener('DOMContentLoaded', function() {
-const totalMonths = 239;
-let longestTimeframe = [];
-
-function reformatData(data) {
-    const monthlySeries = data["Monthly Time Series"];
-    // Directly extract and convert dates and close values, and reverse the order if necessary
-    let dates = [];
-    let numericCloseValues = [];
-    Object.entries(monthlySeries).forEach(([date, values], index) => {
-        if (index < totalMonths) { // Limit to totalMonths from the start
-            dates.push(date);
-            numericCloseValues.push(parseFloat(values["4. close"]));
-        }
-    });
-    // Since we're adding stocks in sequence, reverse here if we want the latest months first
-    return { dates: dates.reverse(), closeValues: numericCloseValues.reverse() };
-}
-
-// get testing content
- const stocks = document.querySelector('#stocks');
- const cmsData = reformatData(JSON.parse(stocks.querySelector('#data').innerText));
-
-// Now cmsData.dates and cmsData.closeValues already contain what you need
-const dates = cmsData.dates;
-//const selectedValues = cmsData.closeValues; // Already numeric and reversed
-
-
-// PART 2 : Drawing graph
-const ctx = document.getElementById('myChart');
-const myChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-        labels: [],
-        datasets: [
-      /*
-      {
-        label: 'Closing Valuation',
-        data: numericCloseValues,
-        borderWidth: 1
+document.addEventListener('DOMContentLoaded', function () {
+    // Get all stock elements
+    const stocks = document.querySelectorAll('.stock-wrapper');
+  
+    let longestTradingPeriod = [];
+    let stockData = [];
+  
+    stocks.forEach(stock => {
+      const name = stock.querySelector('.item-name').textContent;
+      const ticker = stock.querySelector('.item-ticker').textContent;
+      const jsonData = JSON.parse(stock.querySelector('.item-data').textContent);
+      const tradingDates = Object.keys(jsonData["Monthly Time Series"]);
+      const dataPoints = tradingDates.map(date => ({
+        t: new Date(date),
+        y: jsonData["Monthly Time Series"][date]["4. close"]
+      }));
+  
+      // Add this stock's data to the array
+      stockData.push({
+        label: `${name} (${ticker})`,
+        data: dataPoints,
+        fill: false,
+        borderColor: `#${Math.floor(Math.random()*16777215).toString(16)}`, // Random color
+        tension: 0.1
+      });
+  
+      // Update the longest trading period if this stock has a longer history
+      if (tradingDates.length > longestTradingPeriod.length) {
+        longestTradingPeriod = tradingDates.sort((a, b) => new Date(a) - new Date(b));
       }
-      */
-        ]
-    },
-    options: {
+    });
+  
+    // Prepare the chart
+    const ctx = document.getElementById('chart').getContext('2d'); // Ensure you have a <canvas id="chart"></canvas> in HTML
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        datasets: stockData
+      },
+      options: {
         scales: {
-            x: {
-                beginAtZero: true
+          x: {
+            type: 'time',
+            time: {
+              unit: 'month',
+              tooltipFormat: 'MMM YYYY'
+            },
+            title: {
+              display: true,
+              text: 'Date'
             }
+          },
+          y: {
+            title: {
+              display: true,
+              text: 'Price (Close)'
+            }
+          }
         }
-    }
-});
-
-
-// Now select the list-wrapper element and its child stocks
-const stockWrapper = document.querySelectorAll('.stock-wrapper'); // Assuming each item is a direct child div
-
-// 2. Loop through each item
-stockWrapper.forEach((item) => {
-    const itemName = item.querySelector('.item-name').textContent; // Get the name
-    const itemDataString = item.querySelector('.item-data').textContent; // Get the dataset string
-    const itemData = reformatData(JSON.parse(itemDataString)); // Parse the JSON string to an object
-    const itemDataValues = itemData.closeValues;
-
-    if (longestTimeframe.length < itemData.dates.length) {
-        let longestTimeframe = itemData.dates;
-    }
-  
-    // 3. Create a new dataset object for the chart
-    const newDataset = {
-      label: itemName, // Use the item name as the label
-      data: itemDataValues, // Assuming the parsed JSON string is an array of data points
-      borderWidth: 1,
-      // You can also specify other properties like backgroundColor, borderColor, etc.
-    };
-  
-    // Push the new dataset to the chart
-    myChart.data.datasets.push(newDataset);
-});
-
-myChart.data.labels.push(dates);
-myChart.update();
-});
+      }
+    });
+});  
