@@ -18,3 +18,4 @@ document.addEventListener('DOMContentLoaded', function () {
         type: 'line',
         data: data,
     });
+});
