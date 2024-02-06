@@ -53,10 +53,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const ctx = document.getElementById('chart').getContext('2d');
     new Chart(ctx, {
         type: 'line',
-        data: {
-          labels: labels,
-          datasets: stockData
-        },
+        data: data,//{labels: labels,datasets: stockData},
         options: {
           scales: {
             y: {
@@ -107,3 +104,50 @@ document.addEventListener('DOMContentLoaded', function () {
       
       
   });
+
+
+/*
+    new Chart(ctx, {
+        type: 'line',
+        
+        options: {
+            animation: {
+                duration: 2000, // Duration of the animation in milliseconds
+                easing: 'linear', // Easing function to use for the animation
+                onProgress: function(animation) {
+                    progress = animation.currentStep / animation.numSteps;
+                }
+            },
+            scales: {
+                x: {
+                    display: true // Ensure X-axis labels are displayed
+                },
+                y: {
+                    display: true // Ensure Y-axis labels are displayed
+                }
+            }
+        },
+        plugins: [{
+            id: 'customClip',
+            beforeDatasetDraw: function(chart, args) {
+                const ctx = chart.ctx;
+                const chartArea = chart.chartArea;
+                const width = chartArea.right - chartArea.left;
+
+                if (args.index === 0) { // Apply only to the first dataset
+                    ctx.save();
+                    // Clip the drawing area for the dataset
+                    ctx.beginPath();
+                    ctx.rect(chartArea.left, chartArea.top, width * progress, chartArea.bottom - chartArea.top);
+                    ctx.clip();
+                }
+            },
+            afterDatasetDraw: function(chart, args) {
+                if (args.index === 0) { // Apply only to the first dataset
+                    chart.ctx.restore();
+                }
+            }
+        }]
+    });
+});
+*/
