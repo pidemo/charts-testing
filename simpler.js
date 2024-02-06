@@ -19,8 +19,8 @@ const data = {
         data: data,
         options: {
             animation: {
-                duration: 2000, // Duration of the animation in milliseconds
-                easing: 'linear', // Easing function to use for the animation
+                duration: 1000, // Duration of the animation in milliseconds
+                easing: 'inOutQuart', // Easing function to use for the animation
                 onProgress: function(animation) {
                     progress = animation.currentStep / animation.numSteps;
                 }
