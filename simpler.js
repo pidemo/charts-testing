@@ -1,5 +1,14 @@
 // Version 2
-
+const data = {
+    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+    datasets: [{
+      label: 'Looping tension',
+      data: [65, 59, 80, 81, 26, 55, 40],
+      fill: false,
+      borderColor: 'rgb(75, 192, 192)',
+    }]
+  };
+  
 document.addEventListener('DOMContentLoaded', function () {
     const ctx = document.getElementById('chart').getContext('2d');
 
@@ -55,15 +64,7 @@ document.addEventListener('DOMContentLoaded', function () {
 /*
 // Version 1
 
-const data = {
-    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-    datasets: [{
-      label: 'Looping tension',
-      data: [65, 59, 80, 81, 26, 55, 40],
-      fill: false,
-      borderColor: 'rgb(75, 192, 192)',
-    }]
-  };
+
 
   document.addEventListener('DOMContentLoaded', function () {
     const ctx = document.getElementById('chart').getContext('2d');
