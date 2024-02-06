@@ -8,109 +8,57 @@ const data = {
       borderColor: 'rgb(75, 192, 192)',
     }]
   };
-  
-document.addEventListener('DOMContentLoaded', function () {
-    const ctx = document.getElementById('chart').getContext('2d');
 
-    const customClipPlugin = {
-        id: 'customClip',
-        beforeDraw: function(chart, args, options) {
-            const {ctx, chartArea} = chart;
-            const {left, right, top, bottom} = chartArea;
-            const width = right - left;
-            const progress = options.progress; // Use the progress option to determine the clip area
-
-            ctx.save();
-            ctx.beginPath();
-            ctx.rect(left, top, width * progress, bottom - top);
-            ctx.clip();
-        },
-        afterDraw: function(chart) {
-            chart.ctx.restore();
+new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels: labels,
+    datasets: stockData
+  },
+  options: {
+    scales: {
+      y: {
+        beginAtZero: true,
+        title: {
+          display: true,
+          text: 'Price (Close)'
         }
-    };
-
-    let progress = 0; // Initial progress is 0, meaning the clip area is initially empty
-    const chart = new Chart(ctx, {
-        type: 'line',
-        data: data,
-        options: {
-            animation: {
-                duration: 0 // Disable the default animation
-            },
-            plugins: {
-                customClip: {
-                    progress: 0 // Initialize the plugin option for progress
-                }
-            }
-        },
-        plugins: [customClipPlugin]
-    });
-
-    // Function to update the progress and redraw the chart
-    function animate() {
-        progress += 0.01; // Increment progress
-        if (progress <= 1) {
-            chart.options.plugins.customClip.progress = progress;
-            chart.update('none'); // Update the chart without animation
-            requestAnimationFrame(animate); // Continue the animation loop
+      }
+    },
+    animation: {
+      // Define the animation duration
+      duration: 2000, // Total animation duration in milliseconds
+      onComplete: function(animation) {
+        // Optional: callback function to perform actions after the animation completes
+      }
+    },
+    plugins: {
+      // Use the 'tooltip' plugin configuration to delay showing tooltips if necessary
+      tooltip: {
+        enabled: false // Disable tooltips during the animation if desired
+      }
+    },
+    elements: {
+      line: {
+        tension: 0 // Set to 0 to draw straight lines
+      },
+      point: {
+        radius: function(context) {
+          // Dynamically set the radius of each point
+          var index = context.dataIndex;
+          var size = context.dataset.data.length;
+          var currentAnimationStep = context.chart._animationFrame ? context.chart._animationFrame : 0;
+          var animationStepSize = context.chart.animating ? size / (context.chart.options.animation.duration / 16.66) : size;
+          if (index <= currentAnimationStep / animationStepSize) {
+            return 3; // Size of the point
+          }
+          return 0; // Hide the point if it's not yet time to display it
         }
+      }
+    },
+    interaction: {
+      intersect: false,
+      mode: 'nearest'
     }
-
-    animate(); // Start the animation
+  }
 });
-
-
-/*
-// Version 1
-
-
-
-  document.addEventListener('DOMContentLoaded', function () {
-    const ctx = document.getElementById('chart').getContext('2d');
-    let progress = 0; // Variable to store the current progress of the animation
-
-    new Chart(ctx, {
-        type: 'line',
-        data: data,
-        options: {
-            animation: {
-                duration: 1000, // Duration of the animation in milliseconds
-                easing: 'inOutQuart', // Easing function to use for the animation
-                onProgress: function(animation) {
-                    progress = animation.currentStep / animation.numSteps;
-                }
-            },
-            scales: {
-                x: {
-                    display: true // Ensure X-axis labels are displayed
-                },
-                y: {
-                    display: true // Ensure Y-axis labels are displayed
-                }
-            }
-        },
-        plugins: [{
-            id: 'customClip',
-            beforeDatasetDraw: function(chart, args) {
-                const ctx = chart.ctx;
-                const chartArea = chart.chartArea;
-                const width = chartArea.right - chartArea.left;
-
-                if (args.index === 0) { // Apply only to the first dataset
-                    ctx.save();
-                    // Clip the drawing area for the dataset
-                    ctx.beginPath();
-                    ctx.rect(chartArea.left, chartArea.top, width * progress, chartArea.bottom - chartArea.top);
-                    ctx.clip();
-                }
-            },
-            afterDatasetDraw: function(chart, args) {
-                if (args.index === 0) { // Apply only to the first dataset
-                    chart.ctx.restore();
-                }
-            }
-        }]
-    });
-});
-*/
