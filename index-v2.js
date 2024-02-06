@@ -62,25 +62,41 @@ document.addEventListener('DOMContentLoaded', function () {
           scales: {
             y: {
               beginAtZero: true,
-              title: {
-                display: true,
-                text: 'Price (Close)'
-              }
+              display: true // Ensure Y-axis labels are displayed
+              //title: {display: true,text: 'Price (Close)'}
+            },
+            x: {
+                display: true // Ensure X-axis labels are displayed
             }
           },
           animations: {
-            // Define the animation duration
-            duration: 2000, // Total animation duration in milliseconds
-            onComplete: function(animation) {
-              // Optional: callback function to perform actions after the animation completes
+            duration: 2000, // Duration of the animation in milliseconds
+            easing: 'linear', // Easing function to use for the animation
+            onProgress: function(animation) {
+                progress = animation.currentStep / animation.numSteps;
             }
           },
-          plugins: {
-            // Use the 'tooltip' plugin configuration to delay showing tooltips if necessary
-            tooltip: {
-              enabled: false // Disable tooltips during the animation if desired
+          plugins: [{
+            id: 'customClip',
+            beforeDatasetDraw: function(chart, args) {
+                const ctx = chart.ctx;
+                const chartArea = chart.chartArea;
+                const width = chartArea.right - chartArea.left;
+
+                if (args.index === 0) { // Apply only to the first dataset
+                    ctx.save();
+                    // Clip the drawing area for the dataset
+                    ctx.beginPath();
+                    ctx.rect(chartArea.left, chartArea.top, width * progress, chartArea.bottom - chartArea.top);
+                    ctx.clip();
+                }
+            },
+            afterDatasetDraw: function(chart, args) {
+                if (args.index === 0) { // Apply only to the first dataset
+                    chart.ctx.restore();
+                }
             }
-          },
+        }],
           elements: {
             line: {
               tension: 0 // Set to 0 to draw straight lines
@@ -107,47 +123,4 @@ document.addEventListener('DOMContentLoaded', function () {
       });
       
       
-  });
-/*
-
-        options: {
-            animation: {
-                duration: 2000, // Duration of the animation in milliseconds
-                easing: 'linear', // Easing function to use for the animation
-                onProgress: function(animation) {
-                    progress = animation.currentStep / animation.numSteps;
-                }
-            },
-            scales: {
-                x: {
-                    display: true // Ensure X-axis labels are displayed
-                },
-                y: {
-                    display: true // Ensure Y-axis labels are displayed
-                }
-            }
-        },
-        plugins: [{
-            id: 'customClip',
-            beforeDatasetDraw: function(chart, args) {
-                const ctx = chart.ctx;
-                const chartArea = chart.chartArea;
-                const width = chartArea.right - chartArea.left;
-
-                if (args.index === 0) { // Apply only to the first dataset
-                    ctx.save();
-                    // Clip the drawing area for the dataset
-                    ctx.beginPath();
-                    ctx.rect(chartArea.left, chartArea.top, width * progress, chartArea.bottom - chartArea.top);
-                    ctx.clip();
-                }
-            },
-            afterDatasetDraw: function(chart, args) {
-                if (args.index === 0) { // Apply only to the first dataset
-                    chart.ctx.restore();
-                }
-            }
-        }]
-    });
 });
-*/
