@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function () {
             x: {
               type: 'number',
               easing: 'linear',
-              duration: 2000, // Duration in milliseconds
+              duration: 1000, // Duration in milliseconds
               from: 0, // Start from 0 (0%)
               // The 'to' property is not needed because it defaults to the natural end value (100%)
               delay(ctx) {
