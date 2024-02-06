@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function () {
               }
             }
           },
-          animation: {
+          animations: {
             // Animate the x-axis from 0 to 100%
             x: {
               type: 'number',
