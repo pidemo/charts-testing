@@ -47,9 +47,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Assuming a sequential timeline for x-axis labels
     const labels = Array.from({ length: maxLength }, (_, i) => `Month ${i + 1}`);
   
-    // 3. Render the chart v1
-
-    /*
+    // 3. Render the chart
     const ctx = document.getElementById('chart').getContext('2d');
     new Chart(ctx, {
       type: 'line',
@@ -69,58 +67,4 @@ document.addEventListener('DOMContentLoaded', function () {
         }
       }
     });
-    */
-   
-    // Chart v2 
-    document.addEventListener('DOMContentLoaded', function () {
-        const ctx = document.getElementById('chart').getContext('2d');
-        let progress = 0; // Variable to store the current progress of the animation
-    
-        new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: labels,
-                datasets: stockData
-            },
-            options: {
-                animation: {
-                    duration: 2000, // Duration of the animation in milliseconds
-                    easing: 'linear', // Easing function to use for the animation
-                    onProgress: function(animation) {
-                        progress = animation.currentStep / animation.numSteps;
-                    }
-                },
-                scales: {
-                    x: {
-                        display: true // Ensure X-axis labels are displayed
-                    },
-                    y: {
-                        display: true // Ensure Y-axis labels are displayed
-                    }
-                }
-            },
-            plugins: [{
-                id: 'customClip',
-                beforeDatasetDraw: function(chart, args) {
-                    const ctx = chart.ctx;
-                    const chartArea = chart.chartArea;
-                    const width = chartArea.right - chartArea.left;
-    
-                    if (args.index === 0) { // Apply only to the first dataset
-                        ctx.save();
-                        // Clip the drawing area for the dataset
-                        ctx.beginPath();
-                        ctx.rect(chartArea.left, chartArea.top, width * progress, chartArea.bottom - chartArea.top);
-                        ctx.clip();
-                    }
-                },
-                afterDatasetDraw: function(chart, args) {
-                    if (args.index === 0) { // Apply only to the first dataset
-                        chart.ctx.restore();
-                    }
-                }
-            }]
-        });
-    });
-    
   });
