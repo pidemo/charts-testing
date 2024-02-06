@@ -152,12 +152,21 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             },
             animations: {
-                tension: {
-                    duration: 1000,
-                    easing: 'linear',
-                    from: 1,
-                    to: 0,
-                    loop: true
+                // Animate the x-axis from 0 to 100%
+                x: {
+                  type: 'number',
+                  easing: 'linear',
+                  duration: 2000, // Duration in milliseconds
+                  from: 0, // Start from 0 (0%)
+                  // The 'to' property is not needed because it defaults to the natural end value (100%)
+                  delay(ctx) {
+                    if (ctx.type === 'data' && ctx.mode === 'default' && !ctx.dropped) {
+                      return ctx.dataIndex * 100 + ctx.datasetIndex * 1000;
+                      // This delay calculation can be adjusted based on your preference
+                      // for the delay between each line drawing.
+                    }
+                    return 0;
+                  }
                 }
             },
             plugins: {
