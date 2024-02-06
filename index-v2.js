@@ -64,7 +64,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 text: 'Price (Close)'
               }
             }
-          },
+          }
+          /*
           animation: {
             // Define the animation duration
             duration: 2000, // Total animation duration in milliseconds
@@ -100,6 +101,7 @@ document.addEventListener('DOMContentLoaded', function () {
             intersect: false,
             mode: 'nearest'
           }
+          */
         }
       });
       
