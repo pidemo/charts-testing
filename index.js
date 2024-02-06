@@ -46,36 +46,53 @@ document.addEventListener('DOMContentLoaded', function () {
     // Render the chart v1
     const ctx = document.getElementById('chart').getContext('2d');
     new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: allDates, // Use the sorted dates as labels
-        datasets: stockData
-      },
-      options: {
-        scales: {
-          x: {
-            type: 'time',
-            time: {
-              parser: 'yyyy-MM-dd', // Specify the date format if necessary
-              tooltipFormat: 'MMM yyyy',
-              unit: 'month'
+        type: 'line',
+        data: {
+            labels: allDates, // Use the sorted dates as labels
+            datasets: stockData
+        },
+        options: {
+            scales: {
+                x: {
+                    type: 'time',
+                    time: {
+                    parser: 'yyyy-MM-dd', // Specify the date format if necessary
+                    tooltipFormat: 'MMM yyyy',
+                    unit: 'month'
+                    },
+                    title: {
+                    display: true,
+                    text: 'Date'
+                    }
+                },
+                y: {
+                    beginAtZero: true,
+                    title: {
+                    display: true,
+                    text: 'Price (Close)'
+                    }
+                }
             },
-            title: {
-              display: true,
-              text: 'Date'
+            animations: {
+                tension: {
+                    duration: 1000,
+                    easing: 'linear',
+                    from: 1,
+                    to: 0,
+                    loop: true
+                }
+            },
+            plugins: {
+                htmlLegend: {
+                    containerID: 'legend-box',
+                },
+                legend: {
+                    display: true,
+                }
             }
-          },
-          y: {
-            beginAtZero: true,
-            title: {
-              display: true,
-              text: 'Price (Close)'
-            }
-          }
-        }
-      }
+        },
+        plugins: [htmlLegendPlugin],
     });
-  });
   
   
 
