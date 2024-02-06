@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function () {
     
         new Chart(ctx, {
             type: 'line',
-            data: data,
+            data: stockData,
             options: {
                 animation: {
                     duration: 2000, // Duration of the animation in milliseconds
