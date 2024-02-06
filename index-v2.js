@@ -50,22 +50,42 @@ document.addEventListener('DOMContentLoaded', function () {
     // 3. Render the chart
     const ctx = document.getElementById('chart').getContext('2d');
     new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: labels,
-        datasets: stockData
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true,
-            title: {
-              display: true,
-              text: 'Price (Close)'
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: stockData
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+              title: {
+                display: true,
+                text: 'Price (Close)'
+              }
             }
+          },
+          animation: {
+            // Animate the x-axis from 0 to 100%
+            x: {
+              type: 'number',
+              easing: 'linear',
+              duration: 2000, // Duration in milliseconds
+              from: 0, // Start from 0 (0%)
+              // The 'to' property is not needed because it defaults to the natural end value (100%)
+              delay(ctx) {
+                if (ctx.type === 'data' && ctx.mode === 'default' && !ctx.dropped) {
+                  return ctx.dataIndex * 100 + ctx.datasetIndex * 1000;
+                  // This delay calculation can be adjusted based on your preference
+                  // for the delay between each line drawing.
+                }
+                return 0;
+              }
+            },
+            // Optionally, if you want to animate the y-axis as well, you can add similar configuration for 'y'
           }
         }
-      }
-    });
+      });
+      
   });
  
