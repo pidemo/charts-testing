@@ -48,51 +48,43 @@ document.addEventListener('DOMContentLoaded', function () {
     const labels = Array.from({ length: maxLength }, (_, i) => `Month ${i + 1}`);
   
     // 3. Render the chart
-
-        
     const ctx = document.getElementById('chart').getContext('2d');
-    let progress = 0; // Variable to store the current progress of the animation
-
     new Chart(ctx, {
         type: 'line',
-        data: data,
-        options: {
-            animation: {
-                duration: 2000, // Duration of the animation in milliseconds
-                easing: 'linear', // Easing function to use for the animation
-                onProgress: function(animation) {
-                    progress = animation.currentStep / animation.numSteps;
-                }
-            },
-            scales: {
-                x: {
-                    display: true // Ensure X-axis labels are displayed
-                },
-                y: {
-                    display: true // Ensure Y-axis labels are displayed
-                }
-            }
+        data: {
+          labels: labels,
+          datasets: stockData
         },
-        plugins: [{
-            id: 'customClip',
-            beforeDatasetDraw: function(chart, args) {
-                const ctx = chart.ctx;
-                const chartArea = chart.chartArea;
-                const width = chartArea.right - chartArea.left;
-
-                if (args.index === 0) { // Apply only to the first dataset
-                    ctx.save();
-                    // Clip the drawing area for the dataset
-                    ctx.beginPath();
-                    ctx.rect(chartArea.left, chartArea.top, width * progress, chartArea.bottom - chartArea.top);
-                    ctx.clip();
-                }
-            },
-            afterDatasetDraw: function(chart, args) {
-                if (args.index === 0) { // Apply only to the first dataset
-                    chart.ctx.restore();
-                }
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+              title: {
+                display: true,
+                text: 'Price (Close)'
+              }
             }
-        }]
-    });
-});
+          },
+          animation: {
+            // Animate the x-axis from 0 to 100%
+            x: {
+              type: 'number',
+              easing: 'linear',
+              duration: 2000, // Duration in milliseconds
+              from: 0, // Start from 0 (0%)
+              // The 'to' property is not needed because it defaults to the natural end value (100%)
+              delay(ctx) {
+                if (ctx.type === 'data' && ctx.mode === 'default' && !ctx.dropped) {
+                  return ctx.dataIndex * 100 + ctx.datasetIndex * 1000;
+                  // This delay calculation can be adjusted based on your preference
+                  // for the delay between each line drawing.
+                }
+                return 0;
+              }
+            },
+            // Optionally, if you want to animate the y-axis as well, you can add similar configuration for 'y'
+          }
+        }
+      });
+      
+  });
