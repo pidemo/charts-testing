@@ -25,32 +25,34 @@ const data = {
                     progress = animation.currentStep / animation.numSteps;
                 }
             },
-            plugins: {
-                // Define a plugin to clip the drawing area of the chart
-                decimation: {
-                    enabled: false
+            scales: {
+                x: {
+                    display: true // Ensure X-axis labels are displayed
                 },
-                legend: {
-                    display: false
+                y: {
+                    display: true // Ensure Y-axis labels are displayed
                 }
             }
         },
         plugins: [{
             id: 'customClip',
-            beforeDraw: function(chart, args, options) {
+            beforeDatasetDraw: function(chart, args) {
                 const ctx = chart.ctx;
                 const chartArea = chart.chartArea;
                 const width = chartArea.right - chartArea.left;
-                const height = chartArea.bottom - chartArea.top;
 
-                ctx.save();
-                // Clip the drawing area to only the portion that should be currently visible
-                ctx.beginPath();
-                ctx.rect(chartArea.left, chartArea.top, width * progress, height);
-                ctx.clip();
+                if (args.index === 0) { // Apply only to the first dataset
+                    ctx.save();
+                    // Clip the drawing area for the dataset
+                    ctx.beginPath();
+                    ctx.rect(chartArea.left, chartArea.top, width * progress, chartArea.bottom - chartArea.top);
+                    ctx.clip();
+                }
             },
-            afterDraw: function(chart) {
-                chart.ctx.restore();
+            afterDatasetDraw: function(chart, args) {
+                if (args.index === 0) { // Apply only to the first dataset
+                    chart.ctx.restore();
+                }
             }
         }]
     });
