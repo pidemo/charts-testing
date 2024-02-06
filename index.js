@@ -165,7 +165,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     containerID: 'legend-box',
                 },
                 legend: {
-                    display: true,
+                    display: false,
                 }
             }
         },
