@@ -1,4 +1,59 @@
-// Version 3
+// Version 2
+
+document.addEventListener('DOMContentLoaded', function () {
+    const ctx = document.getElementById('chart').getContext('2d');
+
+    const customClipPlugin = {
+        id: 'customClip',
+        beforeDraw: function(chart, args, options) {
+            const {ctx, chartArea} = chart;
+            const {left, right, top, bottom} = chartArea;
+            const width = right - left;
+            const progress = options.progress; // Use the progress option to determine the clip area
+
+            ctx.save();
+            ctx.beginPath();
+            ctx.rect(left, top, width * progress, bottom - top);
+            ctx.clip();
+        },
+        afterDraw: function(chart) {
+            chart.ctx.restore();
+        }
+    };
+
+    let progress = 0; // Initial progress is 0, meaning the clip area is initially empty
+    const chart = new Chart(ctx, {
+        type: 'line',
+        data: data,
+        options: {
+            animation: {
+                duration: 0 // Disable the default animation
+            },
+            plugins: {
+                customClip: {
+                    progress: 0 // Initialize the plugin option for progress
+                }
+            }
+        },
+        plugins: [customClipPlugin]
+    });
+
+    // Function to update the progress and redraw the chart
+    function animate() {
+        progress += 0.01; // Increment progress
+        if (progress <= 1) {
+            chart.options.plugins.customClip.progress = progress;
+            chart.update('none'); // Update the chart without animation
+            requestAnimationFrame(animate); // Continue the animation loop
+        }
+    }
+
+    animate(); // Start the animation
+});
+
+
+/*
+// Version 1
 
 const data = {
     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
@@ -57,3 +112,4 @@ const data = {
         }]
     });
 });
+*/
