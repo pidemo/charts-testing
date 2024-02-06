@@ -14,6 +14,8 @@ document.addEventListener('DOMContentLoaded', function () {
         maxLength = dataLength;
       }
     });
+
+    console.log(stocks);
   
     // 2. Process each stock and prepare its data
     stocks.forEach(stock => {
