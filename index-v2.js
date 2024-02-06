@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const monthIndex = maxLength - i - 1; // Calculate index based on length
         data[monthIndex] = jsonData["Monthly Time Series"][tradingDates[i]]["4. close"];
       }
+
   
       // Add this stock's data to the array
       stockData.push({
@@ -67,7 +68,7 @@ document.addEventListener('DOMContentLoaded', function () {
               }
             }
           },
-          animation: {
+          animations: {
             // Define the animation duration
             duration: 2000, // Total animation duration in milliseconds
             onComplete: function(animation) {
@@ -107,12 +108,8 @@ document.addEventListener('DOMContentLoaded', function () {
       
       
   });
-
-
 /*
-    new Chart(ctx, {
-        type: 'line',
-        
+
         options: {
             animation: {
                 duration: 2000, // Duration of the animation in milliseconds
