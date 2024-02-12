@@ -54,6 +54,9 @@ document.addEventListener('DOMContentLoaded', function () {
           datasets: stockData
         },
         options: {
+          interaction: {
+            mode: 'index'
+          },
           scales: {
             y: {
               beginAtZero: true,
