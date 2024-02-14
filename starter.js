@@ -66,12 +66,24 @@ const config = {
     }
 };
 
-new Chart(ctx, config);
+const myChart = new Chart(ctx, config);
 
 
 // buttons setup
 function timeFrame(period) {
-    console.log(period.value);
+    if (period.value == 'day') {
+        myChart.config.options.scales.x.time.unit = period.value;
+        myChart.config.data.datasets[0].data = day;
+    };
+    if (period.value == 'week') {
+        myChart.config.options.scales.x.time.unit = period.value;
+        myChart.config.data.datasets[0].data = week;
+    };
+    if (period.value == 'month') {
+        myChart.config.options.scales.x.time.unit = period.value;
+        myChart.config.data.datasets[0].data = month;
+    };
+    myChart.update();
 };
 
 
