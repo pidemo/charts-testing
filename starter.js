@@ -31,7 +31,7 @@ const data = {
     //labels: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
     datasets: [{
         label: 'Weekly Sales',
-        data: week,
+        data: month,
         //data: [18,12,6,9,12,3,9],
         borderColor: [
             'rgba(255,26,104,1)',
@@ -55,7 +55,7 @@ const config = {
             x: {
                 type: 'time',
                 time: {
-                    unit: 'week'
+                    unit: 'month'
                 }
             },
             
