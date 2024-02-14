@@ -9,25 +9,32 @@ const day = [
     { x: Date.parse('2024-02-19'), y: 11 }
 ];
 
-const basicData = 0;
-
-  new Chart(ctx, {
+const config = {
     type: 'line',
-    day,
+    data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [{
+          label: '# of Votes',
+          data: [12, 19, 3, 5, 2, 3],
+          borderWidth: 1
+        }]
+    },
     options: {
-      scales: {
-        x: {
-            type: 'time',
-            time: {
-                unit: 'day'
+        scales: {
+            x: {
+                type: 'time',
+                time: {
+                    unit: 'day'
+                }
+            },
+            y: {
+                beginAtZero: true
             }
-        },
-        y: {
-          beginAtZero: true
         }
-      }
     }
-  });
+};
+
+new Chart(ctx, config);
 
 
 
