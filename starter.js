@@ -1,12 +1,12 @@
 const ctx = document.getElementById('chart');
 
 const day = [
-    { x: Date.parse('2024-02-14'), y: 19 },
-    { x: Date.parse('2024-02-15'), y: 12 },
-    { x: Date.parse('2024-02-16'), y: 15 },
-    { x: Date.parse('2024-02-17'), y: 16 },
-    { x: Date.parse('2024-02-18'), y: 14 },
-    { x: Date.parse('2024-02-19'), y: 11 }
+    { x: Date.parse('2024-02-14 00:00:00 GMT+0100'), y: 19 },
+    { x: Date.parse('2024-02-15 00:00:00 GMT+0100'), y: 12 },
+    { x: Date.parse('2024-02-16 00:00:00 GMT+0100'), y: 15 },
+    { x: Date.parse('2024-02-17 00:00:00 GMT+0100'), y: 16 },
+    { x: Date.parse('2024-02-18 00:00:00 GMT+0100'), y: 14 },
+    { x: Date.parse('2024-02-19 00:00:00 GMT+0100'), y: 11 }
 ];
 
 const data = {
