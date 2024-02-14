@@ -28,21 +28,21 @@ const month = [
     { x: Date.parse('2024-08-01 00:00:00 GMT+0100'), y: 44 }
 ];
 
+const colors = [
+    'rgba(255,26,104,1)',
+    'rgba(255,162,235,1)',
+    'rgba(255,206,86,1)',
+    'rgba(255,192,192,1)',
+    'rgba(255,102,255,1)',
+    'rgba(255,159,64,1)',
+    'rgba(0,0,0,1)'
+];
+
 const data = {
-    //labels: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
     datasets: [{
         label: 'Weekly Sales',
         data: month,
-        //data: [18,12,6,9,12,3,9],
-        borderColor: [
-            'rgba(255,26,104,1)',
-            'rgba(255,162,235,1)',
-            'rgba(255,206,86,1)',
-            'rgba(255,192,192,1)',
-            'rgba(255,102,255,1)',
-            'rgba(255,159,64,1)',
-            'rgba(0,0,0,1)'
-        ],
+        borderColor: colors,
         borderWidth: 1
     }]
 }
@@ -50,7 +50,6 @@ const data = {
 const config = {
     type: 'line',
     data,
-    //data: {labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],datasets: [{label: '# of Votes',data: [12, 19, 3, 5, 2, 3],borderWidth: 1}]},
     options: {
         scales: {
             x: {
@@ -66,14 +65,14 @@ const config = {
         transitions: {
             show: {
               animations: {
-                //x: {from: 0},
+                x: {from: 0},
                 y: {from: 0}
               }
             },
             hide: {
               animations: {
                 x: {to: 0},
-                //y: {to: 0}
+                y: {to: 0}
               }
             }
         }
@@ -99,33 +98,3 @@ function timeFrame(period) {
     };
     myChart.update();
 };
-
-
-
-
-  /* 
-  
-  // Starter Bundle
-
-  const ctx = document.getElementById('myChart');
-
-  new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-      datasets: [{
-        label: '# of Votes',
-        data: [12, 19, 3, 5, 2, 3],
-        borderWidth: 1
-      }]
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
-        }
-      }
-    }
-  });
-
-  */
