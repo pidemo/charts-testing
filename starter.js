@@ -69,6 +69,21 @@ const config = {
 new Chart(ctx, config);
 
 
+// buttons setup
+const daySwitch = document.querySelector('#day');
+const weekSwitch = document.querySelector('#week');
+const monthSwitch = document.querySelector('#month');
+
+daySwitch.addEventListener(click, timeFrame(day));
+weekSwitch.addEventListener(click, timeFrame(week));
+monthSwitch.addEventListener(click, timeFrame(month));
+
+function timeFrame(period) {
+    console.log(period.value);
+};
+
+
+
 
   /* 
   
