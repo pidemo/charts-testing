@@ -11,7 +11,7 @@ const day = [
 
 const config = {
     type: 'line',
-    day,
+    data: day,
     /*
     data: {
         labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
