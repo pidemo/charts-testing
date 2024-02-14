@@ -60,7 +60,7 @@ const config = {
                 }
             },  
             y: {
-                //beginAtZero: true
+                beginAtZero: true
             }
         },
         transitions: {
