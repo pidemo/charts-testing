@@ -29,8 +29,8 @@ const data = {
 
 const config = {
     type: 'line',
-    data,
-    /*
+    //data,
+    
     data: {
         labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
         datasets: [{
@@ -39,7 +39,7 @@ const config = {
           borderWidth: 1
         }]
     },
-    */
+    
     options: {
         scales: {
             /*
