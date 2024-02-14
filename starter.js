@@ -74,9 +74,9 @@ const daySwitch = document.querySelector('#day');
 const weekSwitch = document.querySelector('#week');
 const monthSwitch = document.querySelector('#month');
 
-daySwitch.addEventListener(click, timeFrame(day));
-weekSwitch.addEventListener(click, timeFrame(week));
-monthSwitch.addEventListener(click, timeFrame(month));
+daySwitch.addEventListener("click", timeFrame(day));
+weekSwitch.addEventListener("click", timeFrame(week));
+monthSwitch.addEventListener("click", timeFrame(month));
 
 function timeFrame(period) {
     console.log(period.value);
