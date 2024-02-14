@@ -1,21 +1,21 @@
 const ctx = document.getElementById('chart');
 
 const day = [
-    { x: Date.parse('2024-02-14 00:00:00 GMT+0100'), y: 19 },
-    { x: Date.parse('2024-02-15 00:00:00 GMT+0100'), y: 12 },
-    { x: Date.parse('2024-02-16 00:00:00 GMT+0100'), y: 15 },
-    { x: Date.parse('2024-02-17 00:00:00 GMT+0100'), y: 16 },
-    { x: Date.parse('2024-02-18 00:00:00 GMT+0100'), y: 14 },
-    { x: Date.parse('2024-02-19 00:00:00 GMT+0100'), y: 11 }
+    { x: Date.parse('2024-02-12 00:00:00 GMT+0100'), y: 19 },
+    { x: Date.parse('2024-02-13 00:00:00 GMT+0100'), y: 12 },
+    { x: Date.parse('2024-02-14 00:00:00 GMT+0100'), y: 15 },
+    { x: Date.parse('2024-02-15 00:00:00 GMT+0100'), y: 16 },
+    { x: Date.parse('2024-02-16 00:00:00 GMT+0100'), y: 14 },
+    { x: Date.parse('2024-02-17 00:00:00 GMT+0100'), y: 11 }
 ];
 
 const week = [
-    { x: Date.parse('2024-02-14 00:00:00 GMT+0100'), y: 19 },
-    { x: Date.parse('2024-02-21 00:00:00 GMT+0100'), y: 21 },
-    { x: Date.parse('2024-02-28 00:00:00 GMT+0100'), y: 18 },
-    { x: Date.parse('2024-03-06 00:00:00 GMT+0100'), y: 33 },
-    { x: Date.parse('2024-03-13 00:00:00 GMT+0100'), y: 35 },
-    { x: Date.parse('2024-03-20 00:00:00 GMT+0100'), y: 28 }
+    { x: Date.parse('2024-02-12 00:00:00 GMT+0100'), y: 19 },
+    { x: Date.parse('2024-02-19 00:00:00 GMT+0100'), y: 21 },
+    { x: Date.parse('2024-02-26 00:00:00 GMT+0100'), y: 18 },
+    { x: Date.parse('2024-03-04 00:00:00 GMT+0100'), y: 33 },
+    { x: Date.parse('2024-03-11 00:00:00 GMT+0100'), y: 35 },
+    { x: Date.parse('2024-03-18 00:00:00 GMT+0100'), y: 28 }
 ];
 
 const month = [
