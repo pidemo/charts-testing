@@ -13,16 +13,7 @@ const basicData = 0;
 
   new Chart(ctx, {
     type: 'line',
-    data: day,
-    /*{
-      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-      datasets: [{
-        label: '# of Votes',
-        data: [12, 19, 3, 5, 2, 3],
-        borderWidth: 1
-      }]
-      
-    },*/
+    day,
     options: {
       scales: {
         x: {
