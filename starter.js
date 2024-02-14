@@ -10,10 +10,11 @@ const day = [
 ];
 
 const data = {
-    labels: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
+    //labels: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
     datasets: [{
         label: 'Weekly Sales',
-        data: [18,12,6,9,12,3,9],
+        data: day,
+        //data: [18,12,6,9,12,3,9],
         borderColor: [
             'rgba(255,26,104,1)',
             'rgba(255,162,235,1)',
@@ -30,26 +31,16 @@ const data = {
 const config = {
     type: 'line',
     data,
-    /*
-    data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        datasets: [{
-          label: '# of Votes',
-          data: [12, 19, 3, 5, 2, 3],
-          borderWidth: 1
-        }]
-    },
-    */
+    //data: {labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],datasets: [{label: '# of Votes',data: [12, 19, 3, 5, 2, 3],borderWidth: 1}]},
     options: {
         scales: {
-            /*
             x: {
                 type: 'time',
                 time: {
                     unit: 'day'
                 }
             },
-            */
+            
             y: {
                 beginAtZero: true
             }
