@@ -21,12 +21,14 @@ const config = {
     },
     options: {
         scales: {
+            /*
             x: {
                 type: 'time',
                 time: {
                     unit: 'day'
                 }
             },
+            */
             y: {
                 beginAtZero: true
             }
