@@ -11,6 +11,8 @@ const day = [
 
 const config = {
     type: 'line',
+    day,
+    /*
     data: {
         labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
         datasets: [{
@@ -19,6 +21,7 @@ const config = {
           borderWidth: 1
         }]
     },
+    */
     options: {
         scales: {
             /*
