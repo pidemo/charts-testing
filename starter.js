@@ -7,7 +7,9 @@ const day = [
     { x: Date.parse('2024-02-17'), y: 16 },
     { x: Date.parse('2024-02-18'), y: 14 },
     { x: Date.parse('2024-02-19'), y: 11 }
-]
+];
+
+const basicData = 0;
 
   new Chart(ctx, {
     type: 'line',
