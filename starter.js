@@ -1,4 +1,4 @@
-const ctx = document.getElementById('myChart');
+const ctx = document.getElementById('chart');
 
 const day = [
     { x: Date.parse('2024-02-14'), y: 19 },
