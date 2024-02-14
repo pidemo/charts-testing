@@ -24,7 +24,8 @@ const month = [
     { x: Date.parse('2024-04-01 00:00:00 GMT+0100'), y: 26 },
     { x: Date.parse('2024-05-01 00:00:00 GMT+0100'), y: 24 },
     { x: Date.parse('2024-06-01 00:00:00 GMT+0100'), y: 18 },
-    { x: Date.parse('2024-07-01 00:00:00 GMT+0100'), y: 26 }
+    { x: Date.parse('2024-07-01 00:00:00 GMT+0100'), y: 26 },
+    { x: Date.parse('2024-08-01 00:00:00 GMT+0100'), y: 44 }
 ];
 
 const data = {
