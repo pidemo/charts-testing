@@ -9,9 +9,27 @@ const day = [
     { x: Date.parse('2024-02-19'), y: 11 }
 ];
 
+const data = {
+    labels: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
+    datasets: [{
+        label: 'Weekly Sales',
+        data: [18,12,6,9,12,3,9],
+        borderColor: [
+            'rgba(255,26,104,1)',
+            'rgba(255,162,235,1)',
+            'rgba(255,206,86,1)',
+            'rgba(255,192,192,1)',
+            'rgba(255,102,255,1)',
+            'rgba(255,159,64,1)',
+            'rgba(0,0,0,1)'
+        ],
+        borderWidth: 1
+    }]
+}
+
 const config = {
     type: 'line',
-    data: day,
+    data,
     /*
     data: {
         labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
