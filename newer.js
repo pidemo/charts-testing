@@ -71,3 +71,33 @@ function timeFrame(period) {
 
 const myChart = new Chart(ctx, config);
 
+const legendContainer = document.getElementById('legend-wrapper');
+datasets.forEach((dataset, index) => {
+    // Create the legend item container
+    const legendItem = document.createElement('div');
+    legendItem.classList.add('legend-item'); // Use your .legend-item class
+
+    // Create the color indicator
+    const colorIndicator = document.createElement('div');
+    colorIndicator.classList.add('legend-color'); // Use your .legend-color class
+    colorIndicator.style.backgroundColor = dataset.borderColor;
+
+    // Create the text block for the dataset name
+    const textBlock = document.createElement('span');
+    textBlock.textContent = dataset.label;
+
+    // Append the color indicator and text block to the legend item
+    legendItem.appendChild(colorIndicator);
+    legendItem.appendChild(textBlock);
+
+    legendItem.onclick = function() {
+        // Toggle dataset visibility on click
+        const chartDataset = myChart.data.datasets[index];
+        chartDataset.hidden = !chartDataset.hidden;
+        myChart.update();
+    };
+
+    // Append the legend item to the legend container
+    legendContainer.appendChild(legendItem);
+});
+
