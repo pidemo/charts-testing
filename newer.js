@@ -28,6 +28,9 @@ const config = {
         datasets: datasets
     },
     options: {
+        legend: {
+            display: false, // Disable the default legend
+        },
         interaction:{
             mode: 'index'
         },
