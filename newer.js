@@ -90,10 +90,12 @@ datasets.forEach((dataset, index) => {
     legendItem.appendChild(colorIndicator);
     legendItem.appendChild(textBlock);
 
+    legendItem.style.cursor = 'pointer';
     legendItem.onclick = function() {
         // Toggle dataset visibility on click
         const chartDataset = myChart.data.datasets[index];
         chartDataset.hidden = !chartDataset.hidden;
+        legendItem.classList.toggle('is-disabled');
         myChart.update();
     };
 
