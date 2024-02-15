@@ -1,17 +1,3 @@
-// buttons setup
-function timeFrame(period) {
-    if (period.value == 'long') {
-        myChart.config.data.labels = labels;
-        myChart.config.data.datasets = datasets;
-    };
-    if (period.value == 'short') {
-        myChart.config.data.labels = labelsShort;
-        myChart.config.data.datasets = datasetsShort;
-    };
-    myChart.update();
-};
-
-document.addEventListener('DOMContentLoaded', function() {
 
 const ctx = document.getElementById('chart');
 
@@ -67,8 +53,18 @@ const config = {
     }
 };
 
+// buttons setup
+function timeFrame(period) {
+    if (period.value == 'long') {
+        myChart.config.data.labels = labels;
+        myChart.config.data.datasets = datasets;
+    };
+    if (period.value == 'short') {
+        myChart.config.data.labels = labelsShort;
+        myChart.config.data.datasets = datasetsShort;
+    };
+    myChart.update();
+};
+
 const myChart = new Chart(ctx, config);
 
-
-
-});
