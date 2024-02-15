@@ -67,6 +67,9 @@ const config = {
         datasets: datasets
     },
     options: {
+        interaction:{
+            mode: 'index'
+        },
         scales: {
             /*
             x: {
