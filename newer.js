@@ -65,7 +65,7 @@ const config = {
     data: {
         labels: labels,
         datasets: datasets
-    }
+    },
     options: {
         scales: {
             /*
