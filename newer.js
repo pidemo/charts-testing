@@ -70,7 +70,7 @@ function timeFrame(period) {
 };
 
 const myChart = new Chart(ctx, config);
-/*
+
 const legendContainer = document.getElementById('legend-wrapper');
 datasets.forEach((dataset, index) => {
     // Create the legend item container
@@ -102,4 +102,3 @@ datasets.forEach((dataset, index) => {
     // Append the legend item to the legend container
     legendContainer.appendChild(legendItem);
 });
-*/
