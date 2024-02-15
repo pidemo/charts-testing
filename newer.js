@@ -24,7 +24,7 @@ const config = {
     type: 'line',
     //data,
     data: {
-        labels: labels,
+        //labels: labels,
         datasets: datasets
     },
     options: {
