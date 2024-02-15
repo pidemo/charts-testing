@@ -99,7 +99,7 @@ const config = {
 
 const myChart = new Chart(ctx, config);
 
-
+/*
 // buttons setup
 function timeFrame(period) {
     if (period.value == 'day') {
@@ -116,5 +116,5 @@ function timeFrame(period) {
     };
     myChart.update();
 };
-
+*/
 });
