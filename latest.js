@@ -7,7 +7,12 @@ const labels = Object.keys(itemsData[0].Data).sort(); // Assuming all items have
 const datasets = itemsData.map(item => ({
         label: item.Metadata.Name,
         borderColor: item.Metadata.Color,
-        data: labels.map(label => item.Data[label].value),
+        //data: labels.map(label => item.Data[label].value),
+        data: labels.map(label => ({
+            x: label,
+            y: item.Data[label].value,
+            change: item.Data[label].change
+        })),
         fill: false,
 }));
 
@@ -19,6 +24,18 @@ const config = {
         datasets: datasets
     },
     options: {
+        tooltips: {
+            callbacks: {
+                // Adjust the label callback to display the value and change
+                label: function(tooltipItem, data) {
+                    const dataset = data.datasets[tooltipItem.datasetIndex];
+                    const dataPoint = dataset.data[tooltipItem.index];
+                    const value = dataPoint.y;
+                    const change = dataPoint.change;
+                    return `${dataset.label}: ${value} (Change: ${change >= 0 ? '+' : ''}${change * 100}%)`;
+                }
+            }
+        },
         legend: {
             display: false, // Disable the default legend
         },
