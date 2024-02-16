@@ -28,12 +28,12 @@ const config = {
             tooltips: {
                 callbacks: {
                     // Adjust the label callback to display the value and change
-                    label: function(tooltipItem, data) {
-                        const dataset = data.datasets[tooltipItem.datasetIndex];
-                        const dataPoint = dataset.data[tooltipItem.index];
+                    label: function(context) {
+                        const dataset = context.dataset;
+                        const dataPoint = dataset.data[context.dataIndex];
                         const value = dataPoint.y;
                         const change = dataPoint.change;
-                        return `${dataset.label}: ${value} (Change: ${change >= 0 ? '+' : ''}${change * 100}%)`;
+                        return `${dataset.label}: ${value} (Change: ${change >= 0 ? '+' : ''}${(change * 100).toFixed(2)}%)`;
                     }
                 }
             }
