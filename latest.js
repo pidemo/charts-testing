@@ -2,10 +2,7 @@
 const ctx = document.getElementById('chart');
 
 const itemsData = Array.from(document.querySelectorAll('.values')).map(p => JSON.parse(p.textContent));
-
 const labels = Object.keys(itemsData[0].Data).sort(); // Assuming all items have the same dates, get them sorted
-
-
 
 const datasets = itemsData.map(item => ({
         label: item.Metadata.Name,
