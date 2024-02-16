@@ -20,7 +20,7 @@ const datasetsShort = datasets.map(dataset => ({
 }));
 
 
-const totalDuration = 10000;
+const totalDuration = 1000;
 const delayBetweenPoints = totalDuration / itemsData.length;
 const previousY = (ctx) => ctx.index === 0 ? ctx.chart.scales.y.getPixelForValue(100) : ctx.chart.getDatasetMeta(ctx.datasetIndex).data[ctx.index - 1].getProps(['y'], true).y;
 const animation = {
