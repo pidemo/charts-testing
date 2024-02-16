@@ -19,7 +19,6 @@ const config = {
         datasets: datasets
     },
     options: {
-        animation,
         legend: {
             display: false, // Disable the default legend
         },
