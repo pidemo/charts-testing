@@ -39,7 +39,7 @@ const config = {
     options: {
         plugins : {
             customCanvasBackgroundColor: {
-                color: 'lightGreen',
+                color: '#D1D1D1',
               },
             tooltips: {
                 callbacks: {
