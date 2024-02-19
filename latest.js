@@ -16,6 +16,19 @@ const datasets = itemsData.map(item => ({
         fill: false,
 }));
 
+// Note: changes to the plugin code is not reflected to the chart, because the plugin is loaded at chart construction time and editor changes only trigger an chart.update().
+const plugin = {
+    id: 'customCanvasBackgroundColor',
+    beforeDraw: (chart, args, options) => {
+      const {ctx} = chart;
+      ctx.save();
+      ctx.globalCompositeOperation = 'destination-over';
+      ctx.fillStyle = options.color || '#99ffff';
+      ctx.fillRect(0, 0, chart.width, chart.height);
+      ctx.restore();
+    }
+  };
+
 const config = {
     type: 'line',
     //data,
@@ -25,6 +38,9 @@ const config = {
     },
     options: {
         plugins : {
+            customCanvasBackgroundColor: {
+                color: 'lightGreen',
+              },
             tooltips: {
                 callbacks: {
                     // Adjust the label callback to display the value and change
@@ -63,7 +79,8 @@ const config = {
               }
             }
         }
-    }
+    },
+    plugins: [plugin],
 };
 
 
