@@ -80,7 +80,7 @@ const config = {
             }
         }
     },
-    plugins: [plugin],
+    plugins: [plugin]
 };
 
 
