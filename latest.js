@@ -54,9 +54,7 @@ const config = {
                 }
             }
         },
-        legend: {
-            display: false, // Disable the default legend
-        },
+        //legend: {display: false, // Disable the default legend},
         interaction:{
             mode: 'index'
         },
@@ -80,7 +78,10 @@ const config = {
             }
         }
     },
-    plugins: [plugin]
+    plugins: [plugin],
+    legend: {
+        display: false, // Disable the default legend
+    }
 };
 
 
