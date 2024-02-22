@@ -12,7 +12,6 @@ const datasets = itemsData.map(item => ({
         label: item.Metadata.Name,
         borderColor: item.Metadata.Color,
         pointBackgroundColor: item.Metadata.Color,
-        //data: labels.map(label => item.Data[label].value),
         data: labels.map(label => ({
             x: label,
             y: item.Data[label].value,
@@ -47,37 +46,27 @@ const config = {
                 color: '#404c45',
               },
             tooltip: {
-                enabled: true, // Enable tooltips
+                enabled: true,
                 position: 'nearest',
-                backgroundColor: '#fff', // Tooltip background color
-                titleColor: '#000', // Title text color
+                backgroundColor: '#fff',
+                titleColor: '#000',
                 titleFont: {
-                    size: 14, // Title font size
-                    weight: 'bold', // Title font weight
+                    size: 14,
+                    weight: 'bold',
                 },
-                bodyColor: '#000', // Body text color
+                bodyColor: '#000',
                 bodyFont: {
-                    size: 12, // Body font size
+                    size: 12,
                 },
-                borderColor: '#666', // Tooltip border color
-                borderWidth: 1, // Tooltip border width
-                cornerRadius: 4, // Tooltip corner radius
-                displayColors: true, // Display color boxes in the tooltip
-                boxWidth: 10, // Color box width
-                boxHeight: 10, // Color box height
-                usePointStyle: true, // Use point style for the color boxes (circle, rect, etc.)
+                borderColor: '#666',
+                borderWidth: 1,
+                cornerRadius: 4,
+                displayColors: true,
+                boxWidth: 10,
+                boxHeight: 10,
+                usePointStyle: true,
                 // Custom function for tooltip labels
                 callbacks: {
-                    // Adjust the label callback to display the value and change
-                    /* v1
-                    label: function(context) {
-                        const dataset = context.dataset;
-                        const dataPoint = dataset.data[context.dataIndex];
-                        const value = dataPoint.y;
-                        const change = dataPoint.change;
-                        return `${dataset.label}: ${value} (Change: ${change >= 0 ? '+' : ''}${(change * 100).toFixed(2)}%)`;
-                    }
-                    */
                     title: function(tooltipItems) {
                         // Customize the title
                         return tooltipItems[0].label;
@@ -93,12 +82,10 @@ const config = {
                     }
                 },
                 // Adjust font color of tooltips
-                bodyFontColor: '#ffffff' // Change font color of tooltips
+                bodyFontColor: '#ffffff'
             }
         },
-        // legend: {display: false, // Disable the default legend },
         interaction:{
-            //intersect: false,
             mode: 'index'
         },
         scales: {
@@ -154,16 +141,16 @@ const config = {
 
 const myChart = new Chart(ctx, config);
 
+// custom legend setup
 const legendContainer = document.getElementById('legend-wrapper');
-// note to later self : do this also for datasetsShort, and wrap each legend set in a different div, and toggle their visibility on click function
 datasets.forEach((dataset, index) => {
     // Create the legend item container
     const legendItem = document.createElement('div');
-    legendItem.classList.add('legend-item'); // Use your .legend-item class
+    legendItem.classList.add('legend-item');
 
     // Create the color indicator
     const colorIndicator = document.createElement('div');
-    colorIndicator.classList.add('legend-color'); // Use your .legend-color class
+    colorIndicator.classList.add('legend-color');
     colorIndicator.style.backgroundColor = dataset.borderColor;
 
     // Create the text block for the dataset name
